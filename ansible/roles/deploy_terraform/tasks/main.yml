@@ -1,0 +1,38 @@
+    - name: Ensure the system is up to date and install required packages
+      apt:
+        update_cache: yes
+        name:
+          - gnupg
+          - software-properties-common
+        state: present
+    
+    - name: Install curl (if not already installed)
+      apt:
+        name: curl
+        state: present
+
+    - name: Install HashiCorp GPG key
+      apt_key:
+        url: https://apt.releases.hashicorp.com/gpg
+        state: present
+        keyring: /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
+    - name: Verify HashiCorp GPG key fingerprint
+      command: gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
+      register: gpg_fingerprint
+    - debug:
+        msg: "{{ gpg_fingerprint.stdout }}"
+
+    - name: Add HashiCorp repository
+      apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_lsb.codename }} main"
+        state: present
+
+    - name: Update apt cache after adding HashiCorp repository
+      apt:
+        update_cache: yes
+
+    - name: Install Terraform
+      apt:
+        name: terraform
+        state: present

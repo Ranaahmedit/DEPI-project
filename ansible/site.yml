@@ -1,0 +1,10 @@
+---
+- hosts: webservers
+  become: true
+  roles:
+    - setup_docker
+    - deploy_jenkins_on_host
+    - deploy_git
+    - deploy_terraform
+    - install_kubectl
+     

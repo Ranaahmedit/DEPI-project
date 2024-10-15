@@ -1,0 +1,8 @@
+repo_url: https://github.com/Freaked-Dude/MotherOfAllPhishing.git
+repo_dest: /home/ubuntu/myrepo
+company_name: Acme Corporation
+company_git_username: acme-git
+company_git_password: supersecretpassword
+company_git_email: devops@acmecorp.com
+company_git_branch: main
+

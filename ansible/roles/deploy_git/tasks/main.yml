@@ -1,0 +1,21 @@
+---
+    - name: Install Git
+      apt:
+        name: git
+        state: present
+        update_cache: yes
+
+    - name: Configure Git for {{ company_name }}
+      git_config:
+        name: user.name
+        value: "{{ company_git_username }}"
+        scope: global
+      when: company_git_username is defined
+
+    - name: Set Git email for {{ company_name }}
+      git_config:
+        name: user.email
+        value: "{{ company_git_email }}"
+        scope: global
+      when: company_git_email is defined
+
