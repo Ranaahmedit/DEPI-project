@@ -9,6 +9,7 @@ resource "aws_instance" "project" {
   instance_type   = var.ec2_instance_type  
   security_groups = [aws_security_group.sg_final.id] 
   subnet_id       = var.ec2_subnet_id
+  key_name        = var.key_name
   
   tags = {
     Name = var.ec2_name  
