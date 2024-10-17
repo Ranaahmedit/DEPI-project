@@ -7,4 +7,5 @@
     - deploy_git
     - deploy_terraform
     - install_kubectl
+    - install_aws_cli
      
