@@ -1,0 +1,41 @@
+---
+- name: Ensure the system is up to date
+  apt:
+    update_cache: yes
+ 
+- name: Install dependencies (unzip and curl)
+  apt:
+    name:
+      - unzip
+      - curl
+    state: present
+
+- name: Check if AWS CLI is already installed
+  command: aws --version
+  register: aws_cli_check
+  ignore_errors: true
+
+- name: Download AWS CLI if not installed
+  command: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  args:
+    chdir: /tmp
+  when: aws_cli_check.failed
+
+- name: Unzip AWS CLI if not installed
+  unarchive:
+    src: /tmp/awscliv2.zip
+    dest: /tmp/
+    remote_src: yes
+  when: aws_cli_check.failed
+
+- name: Install AWS CLI if not installed
+  command: /tmp/aws/install
+  when: aws_cli_check.failed
+
+- name: Verify AWS CLI installation
+  command: aws --version
+  register: aws_version
+
+- name: Display AWS CLI version
+  debug:
+    msg: "AWS CLI version: {{ aws_version.stdout }}"
