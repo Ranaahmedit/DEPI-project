@@ -5,10 +5,10 @@
 
 # Jenkins Pipeline for Deploying Nginx web app on EKS
 
-This project demonstrates deploying an Nginx web app to an AWS Elastic Kubernetes Service (EKS) cluster using Jenkins.
+This project demonstrates how to deploy an Nginx web app to an AWS Elastic Kubernetes Service (EKS) cluster using Jenkins.
 
 
-## Steps
+## Steps:
 
 ### 1. Create an EC2 Key Pair
 - Generate an EC2 key pair to securely access the EC2 instances for the Jenkins server and other resources.
@@ -35,6 +35,43 @@ This project demonstrates deploying an Nginx web app to an AWS Elastic Kubernete
 
 ## Environments
 
-In real-world scenarios, deployment typically happens in multiple environments (e.g., dev, test, production). However, for this project, we focus on deploying to a single **dev environment**.
+In real-world scenarios, deployment typically happens in multiple environments (e.g., dev, test, production). However, we focus on deploying to a single **dev environment**for this project.
+---------------------------------------------------------------------------
+
+# ✅ The next screens show proof that my project is running successfully
+
+![image](https://github.com/user-attachments/assets/2a37776b-0c47-404f-b1b8-6c35c4c65aff)
+
+![image](https://github.com/user-attachments/assets/e6b47f68-e81d-46c9-bde3-d176290a22cb)
+
+![image](https://github.com/user-attachments/assets/20326645-77ff-4da7-90c2-a5981d24e150)
+
+![image](https://github.com/user-attachments/assets/8d5f4c8a-f996-4719-8249-eb0f4de77c94)
+
+![image](https://github.com/user-attachments/assets/858ae22a-1da4-4cdc-99f6-462092e852a9)
+
+![image](https://github.com/user-attachments/assets/44c3ca94-ede5-44a9-92c5-572db563d01a)
+
+![image](https://github.com/user-attachments/assets/505f46e1-1e8d-41be-833a-bbaf08657bf4)
+
+![image](https://github.com/user-attachments/assets/9e730d46-2ca9-4db8-8240-98ef9404cb47)
+
+![image](https://github.com/user-attachments/assets/5afaba8e-77d9-4df3-b9e6-855a62655bef)
+
+![image](https://github.com/user-attachments/assets/a8b834ff-1805-49f4-b44d-ee6ffa37186b)
+
+![image](https://github.com/user-attachments/assets/ef5c9e60-31ae-4713-b2c1-25841b1205b3)
+
+![image](https://github.com/user-attachments/assets/c6a8767b-5a09-4d26-8052-1e0fcae538f0)
+
+
+
+
+# 🚀Alright! Now it’s time to test the application! 🎉
+
+
+![image](https://github.com/user-attachments/assets/0decde7c-cd40-4332-82cd-2b8159454782)
+
+
 
 
