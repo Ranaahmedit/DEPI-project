@@ -6,6 +6,20 @@ pipeline {
         AWS_DEFAULT_REGION = "us-east-1"
     }
     stages {
+        stage("Delete Node Groups") {
+            steps {
+                script {
+                    dir('2-terraform-eks-deployment') {
+                       
+                        sh """
+                        aws eks list-nodegroups --cluster-name my-eks-cluster --query 'nodegroups[*]' --output text | while read -r nodegroup; do
+                            aws eks delete-nodegroup --cluster-name my-eks-cluster --nodegroup-name \$nodegroup --force
+                        done
+                        """
+                    }
+                }
+            }
+        }
         stage("Destroy EKS Cluster") {
             steps {
                 script {
@@ -18,3 +32,4 @@ pipeline {
         }
     }
 }
+
