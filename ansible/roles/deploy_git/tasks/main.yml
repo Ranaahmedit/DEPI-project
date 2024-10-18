@@ -1,21 +1,29 @@
 ---
-    - name: Install Git
-      apt:
-        name: git
-        state: present
-        update_cache: yes
+- name: Add Git PPA
+  apt_repository:
+    repo: ppa:git-core/ppa
+    state: present
 
-    - name: Configure Git for {{ company_name }}
-      git_config:
-        name: user.name
-        value: "{{ company_git_username }}"
-        scope: global
-      when: company_git_username is defined
+- name: Update apt cache
+  apt:
+    update_cache: yes
 
-    - name: Set Git email for {{ company_name }}
-      git_config:
-        name: user.email
-        value: "{{ company_git_email }}"
-        scope: global
-      when: company_git_email is defined
+- name: Install Git
+  apt:
+    name: git
+    state: latest  
+
+- name: Configure Git for {{ company_name }}
+  git_config:
+    name: user.name
+    value: "{{ company_git_username }}"
+    scope: global
+  when: company_git_username is defined
+
+- name: Set Git email for {{ company_name }}
+  git_config:
+    name: user.email
+    value: "{{ company_git_email }}"
+    scope: global
+  when: company_git_email is defined
 
