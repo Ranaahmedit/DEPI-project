@@ -1,41 +1,21 @@
----
-- name: Ensure the system is up to date
-  apt:
-    update_cache: yes
- 
-- name: Install dependencies (unzip and curl)
-  apt:
-    name:
-      - unzip
-      - curl
-    state: present
+  - name: apt-get update
+    apt: update_cache=yes
+    
+  - name: Install AWS CLI using pip with system package override
+    pip:
+      name: awscli
+      extra_args: --break-system-packages
 
-- name: Check if AWS CLI is already installed
-  command: aws --version
-  register: aws_cli_check
-  ignore_errors: true
+  - name: AWS | Assures dir exists
+    file: 
+      path: "/home/{{ ansible_user }}/.aws" 
+      state: directory
+      mode: '0755'
+    become: no
 
-- name: Download AWS CLI if not installed
-  command: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-  args:
-    chdir: /tmp
-  when: aws_cli_check.failed
-
-- name: Unzip AWS CLI if not installed
-  unarchive:
-    src: /tmp/awscliv2.zip
-    dest: /tmp/
-    remote_src: yes
-  when: aws_cli_check.failed
-
-- name: Install AWS CLI if not installed
-  command: /tmp/aws/install
-  when: aws_cli_check.failed
-
-- name: Verify AWS CLI installation
-  command: aws --version
-  register: aws_version
-
-- name: Display AWS CLI version
-  debug:
-    msg: "AWS CLI version: {{ aws_version.stdout }}"
+  - name: AWS | create credentials
+    template:
+      src: aws_credentials.tpl
+      dest: "/home/{{ ansible_user }}/.aws/credentials"
+      mode: '0644'
+    become: no
